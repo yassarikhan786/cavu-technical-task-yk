@@ -19,5 +19,15 @@ namespace Common.Extensions
             }
             return statusCode;
         }
+
+        public static T GetValue<T>(this ActionResult<T> actionResult)
+        {
+            var actualResult = (actionResult.Result as OkObjectResult);
+            if (actualResult != null)
+            {
+                return (T)actualResult.Value;
+            }
+            return default!;
+        }
     }
 }

@@ -22,7 +22,7 @@ namespace Api.CarParkManagement.Controllers
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<ParkingSpace>> GetAvailableParkingSpaces(DateTime dateFrom, DateTime dateTo)
+        public ActionResult<List<ParkingSpace>> GetAvailableParkingSpaces(DateTime dateFrom, DateTime dateTo)
         {
             var result = _packingSpaceService.GetAvailableParkingServices(dateFrom, dateTo);
 

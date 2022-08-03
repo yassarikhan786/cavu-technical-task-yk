@@ -34,8 +34,8 @@ namespace Services.Db.Implementations
 
         public string GetAvailableParkingServices(DateTime dateFrom, DateTime dateTo)
         {
-            var availableParkingSpaces = _parkingSpaces.Where(x => x.IsAvailable && x.DateFrom >= dateFrom && x.DateTo <= dateTo).ToList();
-            return JsonConvert.SerializeObject(availableParkingSpaces);
+            var matchedParkingSpaces = _parkingSpaces.Where(x => x.IsAvailable && x.DateFrom >= dateFrom && x.DateTo <= dateTo).ToList();
+            return JsonConvert.SerializeObject(matchedParkingSpaces);
         }
     }
 }

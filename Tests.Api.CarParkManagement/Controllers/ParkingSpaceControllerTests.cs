@@ -33,20 +33,25 @@ namespace Tests.Api.CarParkManagement.Controllers
             var parkingSpaceController = Setup(@"[
                 {
                     ""isAvailable"": true,
-                    ""dateFrom"": ""2022-08-03T00:00:00+01:00"",
-                    ""dateTo"": ""2022-08-09T00:00:00+01:00""
+                    ""dateFrom"": ""2022-08-03T00:00:00"",
+                    ""dateTo"": ""2022-08-09T00:00:00""
                 },
                 {
                     ""isAvailable"": true,
-                    ""dateFrom"": ""2022-08-13T00:00:00+01:00"",
-                    ""dateTo"": ""2022-08-19T00:00:00+01:00""
+                    ""dateFrom"": ""2022-08-13T00:00:00"",
+                    ""dateTo"": ""2022-08-19T00:00:00""
                 }]");
+
 
             // Act
             var actual = parkingSpaceController.GetAvailableParkingSpaces(DateTime.Now, DateTime.Now);
+            var statusCode = actual.StatusCode();
+            var parkingSpaces = actual.GetValue();
+
 
             // Assert
-            Assert.Equal(200, actual.StatusCode());
+            Assert.Equal(200, statusCode);
+            Assert.Equal(2, parkingSpaces.Count);
         }
 
         [Fact]
@@ -57,9 +62,12 @@ namespace Tests.Api.CarParkManagement.Controllers
 
             // Act
             var actual = parkingSpaceController.GetAvailableParkingSpaces(DateTime.Now, DateTime.Now);
+            var statusCode = actual.StatusCode();
+            var parkingSpaces = actual.GetValue();
 
             // Assert
-            Assert.Equal(404, actual.StatusCode());
+            Assert.Equal(404, statusCode);
+            Assert.Null(parkingSpaces);
         }
     }
 }
